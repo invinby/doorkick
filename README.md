@@ -4,7 +4,9 @@
 
 <div align="center">
 
-**Полевой самоучитель по IT и кибербезопасности — от минус нуля до Senior SecOps.**
+**Подними уровень знаний — открой новые возможности.**
+
+Полевой самоучитель по IT и кибербезопасности — от минус нуля до Senior SecOps.
 
 [Открыть сайт проекта](https://invinby.github.io/doorkick/) · [Скачать PDF](DoorKick_Hardcore_BLUE_COMPLETE.pdf) · [Читать Markdown](DoorKick_Hardcore_COMPLETE.md)
 
@@ -65,6 +67,6 @@ python DoorKick_Hardcore_build.py
 
 <div align="center">
 
-**Сначала пойми систему. Потом проверяй. Потом чини.**
+**Подними уровень знаний — открой новые возможности.**
 
 </div>
