@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05070b">
+  <meta name="description" content="DoorKick — полевой самоучитель по IT, кибербезопасности и ИИ: от минус нуля до Senior SecOps.">
+  <title>DoorKick — полевой самоучитель по SecOps</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --black: #05070b;
+      --white: #fff;
+      --blue: #075bff;
+      --ink: #05070b;
+      --muted: #05070b;
+      --line: #05070b;
+      --pale: #ffffff;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--white); color: var(--ink); }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    .hero {
+      min-height: 620px; overflow: hidden; position: relative;
+      background: var(--black); color: var(--white); display: grid; align-items: center;
+      padding: clamp(28px, 7vw, 96px);
+    }
+    .hero-grid { width: min(1160px, 100%); margin: auto; display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; color: #ffffff; font: 700 .78rem/1.4 Consolas, monospace; letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; display: block; width: 28px; height: 5px; background: var(--blue); }
+    h1 { max-width: 700px; margin: 24px 0 16px; font-size: clamp(4rem, 9vw, 8.3rem); line-height: .88; letter-spacing: -.075em; }
+    .cursor { color: var(--blue); animation: blink 1s steps(2, start) infinite; }
+    .lead { max-width: 600px; color: #ffffff; font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.6; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 20px; border: 2px solid var(--blue); background: var(--blue); color: var(--white); text-decoration: none; font-weight: 800; }
+    .button:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+    .button.secondary { border-color: #ffffff; background: transparent; color: var(--white); }
+    .button.secondary:hover { border-color: var(--white); background: var(--white); color: var(--black); }
+    .mark { width: min(100%, 470px); margin: auto; aspect-ratio: 1 / 1; position: relative; }
+    .portal { position: absolute; inset: 12% 8% 14% 10%; border: 22px solid var(--blue); }
+    .portal::before { content: ""; position: absolute; inset: 8% 8% 0 8%; border: 8px solid var(--white); border-bottom: 0; }
+    .slab { position: absolute; top: 12%; bottom: 14%; right: -1%; width: 19%; background: var(--blue); clip-path: polygon(0 0,100% 5%,100% 100%,0 94%); }
+    .threshold { position: absolute; left: 10%; right: 8%; bottom: 5%; height: 8%; background: var(--blue); clip-path: polygon(0 0,76% 0,100% 100%,0 100%); }
+    .scan { position: absolute; left: 14%; right: 19%; top: 18%; height: 4px; background: var(--blue); animation: scan 4.2s ease-in-out infinite alternate; }
+    .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--blue); }
+    .wrap { width: min(1100px, calc(100% - 40px)); margin: auto; }
+    .facts { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+    .fact { padding: 24px 12px; border-right: 1px solid var(--line); }
+    .fact:last-child { border-right: 0; }
+    .fact b { display: block; color: var(--blue); font-size: 1.5rem; }
+    .fact span { display: block; margin-top: 5px; color: var(--muted); font-size: .92rem; }
+    section { padding: 76px 0; }
+    .section-label { color: var(--blue); font: 800 .75rem/1.3 Consolas, monospace; letter-spacing: .14em; text-transform: uppercase; }
+    h2 { margin: 10px 0 22px; max-width: 800px; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.05; letter-spacing: -.045em; }
+    .intro { max-width: 750px; color: var(--muted); font-size: 1.1rem; line-height: 1.75; }
+    .modules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 32px; }
+    .module { display: grid; grid-template-columns: 54px 1fr; gap: 18px; padding: 22px; border: 1px solid var(--line); background: var(--white); }
+    .module:hover { border-color: var(--blue); background: var(--pale); }
+    .number { color: var(--blue); font: 800 1.2rem/1.4 Consolas, monospace; }
+    .module h3 { margin: 0 0 7px; font-size: 1.08rem; }
+    .module p { margin: 0; color: var(--muted); line-height: 1.55; }
+    .download { background: var(--black); color: var(--white); }
+    .download .intro { color: #ffffff; }
+    .download-grid { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .safety { border-left: 5px solid var(--blue); padding: 6px 0 6px 18px; color: var(--muted); line-height: 1.65; }
+    footer { padding: 28px 0; background: var(--black); color: #ffffff; border-top: 1px solid #ffffff; font: .86rem/1.5 Consolas, monospace; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 20px; }
+    footer a { color: var(--white); }
+    @keyframes blink { to { visibility: hidden; } }
+    @keyframes scan { from { transform: translateY(0); } to { transform: translateY(260px); } }
+    @media (max-width: 760px) {
+      .hero { min-height: auto; padding-top: 64px; padding-bottom: 56px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .mark { width: min(86vw, 390px); }
+      .facts { grid-template-columns: repeat(2, 1fr); }
+      .fact:nth-child(2) { border-right: 0; }
+      .fact:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .modules, .download-grid { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
+      footer .wrap { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Полевой самоучитель · IT / ИБ / AI</div>
+        <h1>Door<br>Kick<span class="cursor">_</span></h1>
+        <p class="lead">От минус нуля до Senior SecOps. Компьютеры, сети, код, защита и ИИ — человеческим языком, с практикой и без корпоративной ваты.</p>
+        <div class="actions">
+          <a class="button" href="DoorKick_Hardcore_BLUE_COMPLETE.pdf">Скачать PDF · 130 страниц</a>
+          <a class="button secondary" href="DoorKick_Hardcore_COMPLETE.md">Открыть рукопись</a>
+        </div>
+      </div>
+      <div class="mark" aria-label="Геометрический символ открытой двери">
+        <div class="portal"></div><div class="slab"></div><div class="threshold"></div><div class="scan"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap facts" aria-label="О книге">
+      <div class="fact"><b>130</b><span>страниц PDF</span></div>
+      <div class="fact"><b>55</b><span>терминов в словаре</span></div>
+      <div class="fact"><b>0 → Senior</b><span>учебный маршрут</span></div>
+      <div class="fact"><b>RU</b><span>язык книги</span></div>
+    </div>
+
+    <section class="wrap">
+      <div class="section-label">Маршрут обучения</div>
+      <h2>Сначала пойми, как всё работает. Потом лезь проверять.</h2>
+      <p class="intro">DoorKick строит фундамент по шагам: от устройства компьютера до разбора инцидентов и работы Senior SecOps. Каждая тема связывает объяснение, жизненный аналог, практический пример и типичные ошибки.</p>
+      <div class="modules">
+        <article class="module"><div class="number">00</div><div><h3>Словарь</h3><p>55 терминов без гадания по аббревиатурам.</p></div></article>
+        <article class="module"><div class="number">01</div><div><h3>Фундамент</h3><p>ОС, Linux, Windows, сети, OSI, TCP/IP, DNS и HTTP.</p></div></article>
+        <article class="module"><div class="number">02</div><div><h3>Код и скрипты</h3><p>Python, сетевые основы, Bash и автоматизация.</p></div></article>
+        <article class="module"><div class="number">03</div><div><h3>Blue Team</h3><p>Логи, трафик, hardening, firewall, Zero Trust.</p></div></article>
+        <article class="module"><div class="number">04</div><div><h3>Red Team в лаборатории</h3><p>Разведка и веб-безопасность на разрешённых стендах.</p></div></article>
+        <article class="module"><div class="number">05</div><div><h3>ИИ в ИБ</h3><p>Prompt injection, защита LLM-приложений и анализ кода.</p></div></article>
+        <article class="module"><div class="number">06–07</div><div><h3>Люди и инциденты</h3><p>Социальная инженерия, моделирование, разборы и выводы.</p></div></article>
+        <article class="module"><div class="number">∞</div><div><h3>Senior SecOps</h3><p>Цикл от активов и телеметрии до реакции и улучшения.</p></div></article>
+      </div>
+    </section>
+
+    <section class="download">
+      <div class="wrap download-grid">
+        <div>
+          <div class="section-label">Забрать материалы</div>
+          <h2>Открывай дверь с правильной стороны.</h2>
+          <p class="intro">PDF — для чтения и печати. Markdown — для поиска, цитирования и правок. Сборщик лежит рядом, чтобы выпуск можно было пересобрать.</p>
+        </div>
+        <div class="actions">
+          <a class="button" href="DoorKick_Hardcore_BLUE_COMPLETE.pdf">PDF</a>
+          <a class="button secondary" href="DoorKick_Hardcore_COMPLETE.md">Markdown</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-label">Правило лаборатории</div>
+      <h2>Практика — только там, где у тебя есть разрешение.</h2>
+      <p class="safety">Все проверки безопасности выполняй на собственных системах, локальных учебных стендах и CTF либо по явному разрешению владельца. Не сканируй и не тестируй чужую инфраструктуру без согласия.</p>
+    </section>
+  </main>
+
+  <footer><div class="wrap"><span>DOORKICK / ПОЛНЫЙ МАНУАЛ</span><span><a href="README.md">GitHub</a> · <a href="LICENSE">Лицензия</a> · Чёрный / белый / электрический синий</span></div></footer>
+</body>
+</html>
