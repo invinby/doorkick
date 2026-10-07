@@ -40,12 +40,8 @@
     .button:hover { background: var(--white); color: var(--black); border-color: var(--white); }
     .button.secondary { border-color: #ffffff; background: transparent; color: var(--white); }
     .button.secondary:hover { border-color: var(--white); background: var(--white); color: var(--black); }
-    .mark { width: min(100%, 470px); margin: auto; aspect-ratio: 1 / 1; position: relative; }
-    .portal { position: absolute; inset: 12% 8% 14% 10%; border: 22px solid var(--blue); }
-    .portal::before { content: ""; position: absolute; inset: 8% 8% 0 8%; border: 8px solid var(--white); border-bottom: 0; }
-    .slab { position: absolute; top: 12%; bottom: 14%; right: -1%; width: 19%; background: var(--blue); clip-path: polygon(0 0,100% 5%,100% 100%,0 94%); }
-    .threshold { position: absolute; left: 10%; right: 8%; bottom: 5%; height: 8%; background: var(--blue); clip-path: polygon(0 0,76% 0,100% 100%,0 100%); }
-    .scan { position: absolute; left: 14%; right: 19%; top: 18%; height: 4px; background: var(--blue); animation: scan 4.2s ease-in-out infinite alternate; }
+    .mark { width: min(100%, 370px); margin: auto; }
+    .mark img { display: block; width: 100%; height: auto; animation: portal-enter .7s ease-out both; }
     .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--blue); }
     .wrap { width: min(1100px, calc(100% - 40px)); margin: auto; }
     .facts { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
@@ -71,7 +67,7 @@
     footer .wrap { display: flex; justify-content: space-between; gap: 20px; }
     footer a { color: var(--white); }
     @keyframes blink { to { visibility: hidden; } }
-    @keyframes scan { from { transform: translateY(0); } to { transform: translateY(260px); } }
+    @keyframes portal-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 760px) {
       .hero { min-height: auto; padding-top: 64px; padding-bottom: 56px; }
       .hero-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -101,8 +97,8 @@
           <a class="button secondary" href="DoorKick_Hardcore_COMPLETE.md">Открыть рукопись</a>
         </div>
       </div>
-      <div class="mark" aria-label="Геометрический символ открытой двери">
-        <div class="portal"></div><div class="slab"></div><div class="threshold"></div><div class="scan"></div>
+      <div class="mark">
+        <img src="assets/DoorKick_portal_vector.png" alt="Минималистичная геометрическая дверь в чёрном, белом и ярко-синем цветах">
       </div>
     </div>
   </header>

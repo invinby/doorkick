@@ -17,12 +17,14 @@ from reportlab.platypus import (
 )
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
 from pypdf import PdfReader, PdfWriter
 
 ROOT = Path.cwd()
 OUT = ROOT
 WORK = ROOT / "work"
 SOURCE = OUT / "DoorKick_Hardcore_COMPLETE.md"
+COVER_ART = OUT / "assets" / "DoorKick_portal_vector.png"
 BODY_PDF = WORK / "DoorKick_full_body.pdf"
 COVER_PDF = WORK / "DoorKick_full_cover.pdf"
 FINAL_PDF = OUT / "DoorKick_Hardcore_BLUE_COMPLETE.pdf"
@@ -157,53 +159,31 @@ def page_decor(c, doc):
 
 def draw_cover():
     c = canvas.Canvas(str(COVER_PDF), pagesize=A4)
+    image = ImageReader(str(COVER_ART))
+    iw, ih = image.getSize()
+    scale = max(PAGE_W / iw, PAGE_H / ih)
+    dw, dh = iw * scale, ih * scale
     c.setFillColor(INK)
     c.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
-
-    # Flat vector doorway: hard-edged geometry, no gradients or textures.
-    c.setFillColor(BLUE)
-    c.rect(68, 178, 459, 470, fill=1, stroke=0)
-    c.setFillColor(INK)
-    c.rect(96, 205, 403, 416, fill=1, stroke=0)
-    c.setFillColor(WHITE)
-    c.rect(96, 205, 15, 416, fill=1, stroke=0)
-    c.rect(96, 606, 403, 15, fill=1, stroke=0)
-
-    # Open slab and threshold are simple vector polygons.
-    p = c.beginPath()
-    p.moveTo(410, 205)
-    p.lineTo(488, 225)
-    p.lineTo(488, 642)
-    p.lineTo(410, 621)
-    p.close()
-    c.setFillColor(BLUE)
-    c.drawPath(p, fill=1, stroke=0)
-    p = c.beginPath()
-    p.moveTo(111, 205)
-    p.lineTo(410, 205)
-    p.lineTo(488, 178)
-    p.lineTo(68, 178)
-    p.close()
-    c.setFillColor(BLUE)
-    c.drawPath(p, fill=1, stroke=0)
+    c.drawImage(image, (PAGE_W - dw) / 2, (PAGE_H - dh) / 2,
+                width=dw, height=dh, mask="auto")
 
     c.setFillColor(BLUE)
     c.rect(52, PAGE_H - 93, 36, 6, fill=1, stroke=0)
     c.setFont("ArialBold", 12.4)
     c.setFillColor(WHITE)
     c.drawString(52, PAGE_H - 122, "ПОЛЕВОЙ САМОУЧИТЕЛЬ ПО IT И КИБЕРБЕЗОПАСНОСТИ")
-    c.setFont("ArialBold", 66)
-    c.drawString(47, PAGE_H - 198, "DoorKick")
-    c.setFillColor(BLUE)
-    c.setFont("ArialBold", 14)
-    c.drawString(52, 145, "Подними уровень знаний —")
-    c.drawString(52, 126, "открой новые возможности.")
     c.setFillColor(WHITE)
-    c.setFont("Georgia", 17)
-    c.drawString(52, 91, "От минус нуля до Senior SecOps")
-    c.setFillColor(BLUE)
-    c.setFont("ArialBold", 9.2)
-    c.drawString(52, 44, "ПОЛНОЕ ИЗДАНИЕ  /  МОДУЛИ 0–7 + SENIOR SECOPS")
+    c.setFont("ArialBold", 46)
+    c.drawString(48, 145, "DoorKick")
+    c.setFont("ArialBold", 13)
+    c.drawString(48, 98, "Подними уровень знаний —")
+    c.drawString(48, 80, "открой новые возможности.")
+    c.setFont("Georgia", 15)
+    c.drawString(48, 53, "От минус нуля до Senior SecOps")
+    c.setFillColor(WHITE)
+    c.setFont("ArialBold", 8.6)
+    c.drawString(48, 27, "ПОЛНОЕ ИЗДАНИЕ  /  МОДУЛИ 0–7 + SENIOR SECOPS")
     c.showPage()
     c.save()
 
