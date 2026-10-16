@@ -52,7 +52,7 @@ DoorKick — большая практическая книга для тех, �
 
 ## Пересобрать PDF
 
-Нужны Python, `reportlab`, `pypdf` и шрифты Arial, Georgia и Consolas. Сейчас сборщик рассчитан на Windows: он ищет эти шрифты в `C:/Windows/Fonts`. На macOS или Linux перед сборкой укажи в `DoorKick_Hardcore_build.py` каталог с установленными шрифтами. Скрипт ожидает файлы `arial.ttf`, `arialbd.ttf`, `georgia.ttf`, `georgiab.ttf`, `georgiai.ttf`, `georgiaz.ttf` и `consola.ttf`. Из корня репозитория:
+Нужны Python, `reportlab`, `pypdf` и шрифты Arial, Georgia и Consolas. Сейчас сборщик рассчитан на Windows: он ищет эти шрифты в `C:/Windows/Fonts`. На macOS или Linux перед сборкой укажи в `DoorKick_Hardcore_build.py` каталог с установленными шрифтами, сохранив ожидаемые имена файлов. Из корня репозитория:
 
 ```powershell
 python -m pip install -r requirements.txt
